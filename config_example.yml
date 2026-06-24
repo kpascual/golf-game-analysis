@@ -1,0 +1,2 @@
+database_file: "/path/golf_data.db"
+raw_csv_directory: "/path/"
