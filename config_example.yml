@@ -1,2 +1,4 @@
 database_file: "/path/golf_data.db"
 raw_csv_directory: "/path/"
+directory_18birdies: "/path2/"
+latest_18birdies_dump: "dump.json"
