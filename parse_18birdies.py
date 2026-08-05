@@ -65,4 +65,5 @@ golf_rounds = pd.DataFrame(golf_rounds_list)
 golf_rounds = golf_rounds.merge(courses, on = 'club_id', how = 'left')
 golf_rounds.rename(columns={"name":"course_name"}, inplace = True)
 
-golf_rounds.drop(columns=['clubId_x','stats','holeStrokes','clubId_y','recommendedStats']).to_sql("rounds", conn, if_exists = "replace")
+print(golf_rounds)
+golf_rounds.drop(columns=['clubId_x','stats','holeStrokes','clubId_y','recommendedStats','shotEntries']).to_sql("rounds", conn, if_exists = "replace")
