@@ -12,6 +12,7 @@ import glob
 import os
 import re
 import sqlite3
+from pathlib import Path
 
 # Third-party
 import numpy as np
@@ -27,7 +28,10 @@ from airflow.sdk import dag, task
 # Configuration
 # ---------------------------------------------------------------------------
 
-with open("config.yml") as f:
+DAG_ROOT = Path(__file__).parent
+CONFIG_PATH = DAG_ROOT / "config.yml"
+
+with open(CONFIG_PATH) as f:
     cfg = yaml.load(f, yaml.FullLoader)
     DB_NAME = cfg['database_file']
     RAW_DATA_DIR = cfg['raw_csv_directory']
@@ -297,7 +301,9 @@ def save_to_database(df: pd.DataFrame, table_name: str, db_name: str = DB_NAME) 
 
 
 @dag(
-    dag_id = 'launch_monitor_processor2'
+    dag_id = 'golf_launch_monitor_processor',
+    schedule = "0 16 * * *",
+    catchup=False
 )
 def process_all():
     @task()
